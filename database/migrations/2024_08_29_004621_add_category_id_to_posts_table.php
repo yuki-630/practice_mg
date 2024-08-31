@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('posts', function (Blueprint $table) {
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            //'category_id' は 'categoriesテーブル' の 'id' を参照する外部キーです
         });
     }
 
@@ -22,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::table('posts', function (Blueprint $table) {
+            //
+        });
     }
 };
